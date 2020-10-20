@@ -9,6 +9,9 @@ public class Tuite<T> {
     private final String texto;
     private T anexo;
     public ArrayList<String> tags = new ArrayList<>();
+    public ArrayList<String> tagsAuxiliar = new ArrayList<>();
+
+
 
     // hashtags?
     // objeto anexado?
@@ -46,7 +49,7 @@ public class Tuite<T> {
 
             }
 
-            int numOccurences = Collections.frequency(tags, "");
+
 
         }
         return this.tags;

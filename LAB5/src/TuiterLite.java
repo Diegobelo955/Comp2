@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -15,7 +14,12 @@ import static org.junit.Assert.assertEquals;
 public class TuiterLite<T> {
 
     public static final int TAMANHO_MAXIMO_TUITES = 120;
-    List<Usuario> usuarios = new ArrayList<>();
+    Map<String,Usuario> usuarioByEmail = new HashMap<>();
+
+    Map<String, Integer> wordCount = new HashMap<>();
+    ArrayList<String>auxiliar = new ArrayList<>();
+
+
 
 
 
@@ -28,14 +32,13 @@ public class TuiterLite<T> {
      * @return O Usuario criado.
      */
     public Usuario cadastrarUsuario(String nome, String email) {
-        for (Usuario usuarioGenerico : usuarios) {
-            if (usuarioGenerico.getEmail().equals(email)) {
+        Usuario novoUsuario = new Usuario(nome, email);
+            if (this.usuarioByEmail.containsKey(email)) {
                 return null;
             }
-        }
 
-        Usuario novoUsuario = new Usuario(nome, email);
-        usuarios.add(novoUsuario);
+
+        usuarioByEmail.put(email,novoUsuario);
 
 
         return novoUsuario;
@@ -51,12 +54,13 @@ public class TuiterLite<T> {
      * @return Um "tuíte", que será devidamente publicado no sistema
      */
     public Tuite tuitarAlgo(Usuario usuario, String texto) {
-        if (texto.length() > TAMANHO_MAXIMO_TUITES || equals(usuario)) {
+        if (texto.length() > TAMANHO_MAXIMO_TUITES ) {
             return null;
         }
-        if(!usuarios.contains(usuario)) return null;
+        if(!this.usuarioByEmail.containsKey(usuario.getEmail())) return null;
 
         Tuite novoTuite = new Tuite(usuario, texto);
+        auxiliar.addAll(novoTuite.getHashtags());
         usuario.aumentaContador();
         Usuario.setarUsuario(usuario);
         return novoTuite;
@@ -69,12 +73,35 @@ public class TuiterLite<T> {
      * @return A hashtag mais comum, ou null se nunca uma hashtag houver sido tuitada.
      */
     public String getHashtagMaisComum() {
+        Integer maior = 0;
+        String Certa = null;
+        for(String auxWord : auxiliar ) {
+            Integer count = wordCount.get(auxWord);
+            wordCount.put(auxWord,(count==null) ? 1 : count +1);
+        }
 
+        for(Map.Entry<String, Integer> entrada : wordCount.entrySet()) {
+            String valueWordmap = entrada.getKey();
+            Integer c = entrada.getValue();
+            if(c == 0) {
+                return null;
+            }
+            else if (maior < c) {
+                maior = c;
+                Certa = valueWordmap;
+            }
 
-        return null;
+        }
+
+        
+
+        return Certa;
+
     }
 
 
-}
 
+
+
+}
 

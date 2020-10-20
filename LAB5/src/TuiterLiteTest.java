@@ -98,7 +98,7 @@ public class TuiterLiteTest {
         // Deixe as linhas seguintes comentadas, mas verifique o comportamento desejado indicado abaixo
         // (note que estamos tentando anexar outros tipos de objetos que não são Image).
 
-       // tuite.anexarAlgo(usuario);       // essa linha, se fosse descomentada, daria erro de compilação
+        // tuite.anexarAlgo(usuario);       // essa linha, se fosse descomentada, daria erro de compilação
         //tuite.anexarAlgo("1234");        // essa linha, se fosse descomentada, daria erro de compilação
         //tuite.anexarAlgo(new Object());  // essa linha, se fosse descomentada, daria erro de compilação
     }
@@ -122,10 +122,10 @@ public class TuiterLiteTest {
         assertFalse(tuite.getHashtags().contains("algo"));
         assertFalse(tuite.getHashtags().contains("#paralelepipedo"));
 
-      // finalmente, vamos tuitar outra coisa para ver se as hashtags estão sendo registradas corretamente no sistema
-       tuiterLite.tuitarAlgo(usuario, "Repetindo o uso de uma hashtag #LAB5");
-       assertEquals("Hashtags devem ser contabilizadas corretamente pelo sistema",
-               "#LAB5", tuiterLite.getHashtagMaisComum());
+        // finalmente, vamos tuitar outra coisa para ver se as hashtags estão sendo registradas corretamente no sistema
+        tuiterLite.tuitarAlgo(usuario, "Repetindo o uso de uma hashtag #LAB5");
+        assertEquals("Hashtags devem ser contabilizadas corretamente pelo sistema",
+                "#LAB5", tuiterLite.getHashtagMaisComum());
     }
 
     @Test
@@ -149,7 +149,7 @@ public class TuiterLiteTest {
 
         // verifique a promoção ao nível seguinte
         assertEquals("O usuário deve ser promovido automaticamente a SENIOR quando atinge a marca de " +
-                Usuario.MIN_TUITES_SENIOR + " tuítes",
+                        Usuario.MIN_TUITES_SENIOR + " tuítes",
                 NivelUsuario.SENIOR, usuario.getNivel());
 
         // vamos agora passá-lo para o próximo nível
@@ -159,7 +159,7 @@ public class TuiterLiteTest {
 
         // verifique a promoção ao nível seguinte
         assertEquals("O usuário deve ser promovido automaticamente a NINJA quando atinge a marca de " +
-                Usuario.MIN_TUITES_NINJA + " tuítes",
+                        Usuario.MIN_TUITES_NINJA + " tuítes",
                 NivelUsuario.NINJA, usuario.getNivel());
     }
 
@@ -189,10 +189,10 @@ public class TuiterLiteTest {
             tuiterLite.cadastrarUsuario(nome, email);
         }
 
-//        // agora vamos tentar fazer um número grande de tuítes com usuário desconhecido
-//        Usuario usuarioNaoCadastrado = new Usuario("Usuário Desconhedido", "unknown@void.com");
-//        for (int i = 1; i <= 300_000; i++) {
-//            assertNull(tuiterLite.tuitarAlgo(usuarioNaoCadastrado, "Teste"));
-//        }
+        // agora vamos tentar fazer um número grande de tuítes com usuário desconhecido
+        Usuario usuarioNaoCadastrado = new Usuario("Usuário Desconhedido", "unknown@void.com");
+        for (int i = 1; i <= 300_00; i++) {
+            assertNull(tuiterLite.tuitarAlgo(usuarioNaoCadastrado, "Teste"));
+        }
     }
 }

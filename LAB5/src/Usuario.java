@@ -45,6 +45,8 @@ public class Usuario {
         this.nivel = nivelUsuario;
     }
 
+    //Contador para saber o número de tuites realizados.
+
     public int aumentaContador() {
         return this.contadorTuite++;
     }
@@ -52,6 +54,7 @@ public class Usuario {
         return this.contadorTuite;
     }
 
+    //Método criado para alterar o nível do usuário
     public static void setarUsuario(Usuario usuario) {
         if (usuario.getContadorTuite() < 200 || usuario.getContadorTuite() >= 1000) {
             if (usuario.getContadorTuite() >= 1000) {
@@ -62,7 +65,7 @@ public class Usuario {
         }
     }
 
-
+    //Override do método equals da classe Object
 
     @Override
     public boolean equals(Object o1) {
@@ -77,6 +80,6 @@ public class Usuario {
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, nome);
+        return Objects.hash(email);
     }
 }
